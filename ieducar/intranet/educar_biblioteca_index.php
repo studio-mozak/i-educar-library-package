@@ -6,7 +6,7 @@ use App\Models\LegacyStudent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-// Adiciona os includes necessários para os modelos legacy
+
 require_once 'include/pmieducar/clsPmieducarBiblioteca.inc.php';
 require_once 'include/pmieducar/clsPmieducarBibliotecaUsuario.inc.php';
 require_once 'include/pmieducar/clsPmieducarAcervo.inc.php';
