@@ -32,37 +32,38 @@ return new class extends clsListagem
             $this->totalBibliotecas = DB::table('pmieducar.biblioteca')->where('ativo', 1)->count();
             $this->totalObras = DB::table('pmieducar.acervo')->where('ativo', 1)->count();
             $this->totalClientes = DB::table('pmieducar.cliente')->where('ativo', 1)->count();
-        } else {
-            $escolas_usuario = DB::table('pmieducar.escola_usuario')
-                ->where('ref_cod_usuario', $userId)
-                ->pluck('ref_cod_escola')
-                ->toArray();
-            if (empty($escolas_usuario)) {
-                $this->totalBibliotecas = 0;
-                $this->totalObras = 0;
-                $this->totalClientes = 0;
-                return;
-            }
-            $bibliotecas = DB::table('pmieducar.biblioteca')
-                ->where('ativo', 1)
-                ->whereIn('ref_cod_escola', $escolas_usuario)
-                ->pluck('cod_biblioteca');
-            $this->totalBibliotecas = $bibliotecas->count();
-
-            if ($bibliotecas->isEmpty()) {
-                $this->totalObras = 0;
-                $this->totalClientes = 0;
-                return;
-            }
-            $this->totalObras = DB::table('pmieducar.acervo')
-                ->where('ativo', 1)
-                ->whereIn('ref_cod_biblioteca', $bibliotecas)
-                ->count();
-            $this->totalClientes = DB::table('pmieducar.cliente_tipo_cliente')
-                ->whereIn('ref_cod_biblioteca', $bibliotecas)
-                ->distinct('ref_cod_cliente')
-                ->count('ref_cod_cliente');
+            return;
         }
+        $escolas_usuario = DB::table('pmieducar.escola_usuario')
+            ->where('ref_cod_usuario', $userId)
+            ->pluck('ref_cod_escola')
+            ->toArray();
+        if (empty($escolas_usuario)) {
+            $this->totalBibliotecas = 0;
+            $this->totalObras = 0;
+            $this->totalClientes = 0;
+            return;
+        }
+        $bibliotecas = DB::table('pmieducar.biblioteca')
+            ->where('ativo', 1)
+            ->whereIn('ref_cod_escola', $escolas_usuario)
+            ->pluck('cod_biblioteca');
+        $this->totalBibliotecas = $bibliotecas->count();
+
+        if ($bibliotecas->isEmpty()) {
+            $this->totalObras = 0;
+            $this->totalClientes = 0;
+            return;
+        }
+        $this->totalObras = DB::table('pmieducar.acervo')
+            ->where('ativo', 1)
+            ->whereIn('ref_cod_biblioteca', $bibliotecas)
+            ->count();
+        $this->totalClientes = DB::table('pmieducar.cliente_tipo_cliente')
+            ->whereIn('ref_cod_biblioteca', $bibliotecas)
+            ->distinct('ref_cod_cliente')
+            ->count('ref_cod_cliente');
+        
     }
 
     public function RenderHTML()
