@@ -28,26 +28,15 @@ return new class extends clsListagem
         $logged_user = Session::get('logged_user');
         $role = $logged_user->role ?? '';
         $userId = $logged_user->personId;
-
         if ($role === 'Administrador') {
             $this->totalBibliotecas = DB::table('pmieducar.biblioteca')->where('ativo', 1)->count();
             $this->totalObras = DB::table('pmieducar.acervo')->where('ativo', 1)->count();
             $this->totalClientes = DB::table('pmieducar.cliente')->where('ativo', 1)->count();
         } else {
-            $escolas_usuario = [];
-            if (isset($logged_user->schools) && is_array($logged_user->schools)) {
-                foreach ($logged_user->schools as $school) {
-                    if (is_object($school) && isset($school->id)) {
-                        $escolas_usuario[] = $school->id;
-                    } elseif (is_array($school) && isset($school['id'])) {
-                        $escolas_usuario[] = $school['id'];
-                    } elseif (is_object($school) && isset($school->cod_escola)) {
-                        $escolas_usuario[] = $school->cod_escola;
-                    } elseif (is_array($school) && isset($school['cod_escola'])) {
-                        $escolas_usuario[] = $school['cod_escola'];
-                    }
-                }
-            }
+            $escolas_usuario = DB::table('pmieducar.escola_usuario')
+                ->where('ref_cod_usuario', $userId)
+                ->pluck('ref_cod_escola')
+                ->toArray();
             if (empty($escolas_usuario)) {
                 $this->totalBibliotecas = 0;
                 $this->totalObras = 0;
@@ -84,7 +73,7 @@ return new class extends clsListagem
                 '/intranet/educar_biblioteca_index.php' => 'Biblioteca'
             ]
         );
-        
+
         return '
             <h1 class="title_ensinus">Módulo <strong>Biblioteca</strong></h1>
             <div>
