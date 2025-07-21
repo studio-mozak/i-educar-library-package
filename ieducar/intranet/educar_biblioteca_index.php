@@ -81,7 +81,7 @@ return new class extends clsListagem
         $this->breadcrumb(
             currentPage: 'Dashboard',
             breadcrumbs: [
-                '/intranet/educar_index.php' => 'Escola'
+                '/intranet/educar_biblioteca_index.php' => 'Biblioteca'
             ]
         );
         
