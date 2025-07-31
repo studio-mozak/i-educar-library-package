@@ -106,7 +106,7 @@ return new class extends clsDetalhe {
             $this->addDetalhe([ 'Valor Multa', "{$registro['valor_multa']}"]);
         }
 
-        if ($obj_permissoes->permissao_cadastra(628, $this->pessoa_logada, 11)) {
+        if ($obj_permissoes->permissao_cadastra(15859, $this->pessoa_logada, 11)) {
             $this->array_botao = [];
             $this->array_botao_url_script = [];
 
@@ -127,6 +127,6 @@ return new class extends clsDetalhe {
     public function Formular()
     {
         $this->title = 'Exemplar Devolução';
-        $this->processoAp = '628';
+        $this->processoAp = '15859';
     }
 };

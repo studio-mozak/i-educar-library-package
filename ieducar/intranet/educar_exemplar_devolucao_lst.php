@@ -52,6 +52,8 @@ return new class extends clsListagem {
 
     public function Gerar()
     {
+        global $nivel_usuario, $qtd_bibliotecas;
+
         $this->titulo = 'Exemplar Devolução - Listagem';
 
         foreach ($_GET as $var => $val) { // passa todos os valores obtidos no GET para atributos do objeto
@@ -211,6 +213,6 @@ return new class extends clsListagem {
     public function Formular()
     {
         $this->title = 'Exemplar Devolução';
-        $this->processoAp = '628';
+        $this->processoAp = '15859';
     }
 };
