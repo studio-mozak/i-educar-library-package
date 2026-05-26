@@ -101,7 +101,6 @@ return new class extends clsDetalhe {
         if ($obj_permissoes->permissao_cadastra(597, $this->pessoa_logada, 11)) {
             $this->url_novo = 'educar_exemplar_tipo_cad.php';
         }
-
         if ($obj_permissoes->permissao_editar(597, $this->pessoa_logada, 11)) {
             $this->url_editar = "educar_exemplar_tipo_cad.php?cod_exemplar_tipo={$registro['cod_exemplar_tipo']}";
         }

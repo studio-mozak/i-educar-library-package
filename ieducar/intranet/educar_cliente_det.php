@@ -81,6 +81,9 @@ return new class extends clsDetalhe {
         if ($obj_permissoes->permissao_editar(603, $this->pessoa_logada, 11)) {
             $this->url_editar      = "educar_cliente_cad.php?cod_cliente={$cliente['cod_cliente']}&ref_cod_biblioteca={$this->ref_cod_biblioteca}";
         }
+        if ($obj_permissoes->permissao_editar(603, $this->pessoa_logada, 11)) {
+            $this->url_editar      = "educar_cliente_cad.php?cod_cliente={$cliente['cod_cliente']}&ref_cod_biblioteca={$this->ref_cod_biblioteca}";
+        }
 
         $this->url_cancelar = 'educar_cliente_lst.php';
         $this->largura = '100%';

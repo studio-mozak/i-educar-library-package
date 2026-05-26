@@ -86,11 +86,12 @@ return new class extends clsDetalhe {
         $obj_permissoes = new clsPermissoes();
         if ($obj_permissoes->permissao_cadastra(606, $this->pessoa_logada, 11)) {
             $this->url_novo = 'educar_exemplar_cad.php';
+
             if (!$registro['ref_cod_motivo_baixa']) {
                 $this->array_botao = ['Baixa'];
                 $this->array_botao_url = ["educar_exemplar_baixa.php?cod_exemplar={$registro['cod_exemplar']}"];
+            }
         }
-
         if ($obj_permissoes->permissao_editar(606, $this->pessoa_logada, 11)) {
             $this->url_editar = "educar_exemplar_cad.php?cod_exemplar={$registro['cod_exemplar']}";
         }
